@@ -4,13 +4,22 @@ def call(String project, String ImageTag, String hubUser){
             usernameVariable: "USER",
             passwordVariable: "PASS"
     )]) {
+       sh '''
         echo $PASS | docker login -u $USER --password-stdin
-        // sh "docker login -u '$USER' -p '$PASS'"
+        '''
     }
-    sh "docker image push ${hubUser}/${project}:${ImageTag}"
-    //sh "docker image push ${hubUser}/${project}:latest"   
+
+    sh """
+    docker push ${hubUser}/${project}:${ImageTag}
+    """ 
 }
 
+
+//echo $PASS | docker login -u $USER --password-stdin
+        // sh "docker login -u '$USER' -p '$PASS'"
+ //   }
+ //   sh "docker image push ${hubUser}/${project}:${ImageTag}"
+    //sh "docker image push ${hubUser}/${project}:latest" 
 
 // def call(String aws_account_id, String region, String ecr_repoName){
     
