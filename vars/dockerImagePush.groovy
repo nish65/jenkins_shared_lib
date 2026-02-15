@@ -10,7 +10,7 @@ def call(String project, String ImageTag, String hubUser){
     }
 
     sh """
-    docker push nishwanths
+    docker push ${hubUser}/${project}:${ImageTag}
     """ 
 }
 
